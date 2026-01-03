@@ -1,0 +1,138 @@
+{
+  "workers": {
+    "service": "Workers",
+    "generatedAt": "2026-01-03T16:13:03.989Z",
+    "operations": {
+      "getScript": {
+        "errors": [
+          {
+            "tag": "NotFoundError",
+            "code": 10007,
+            "message": "This Worker does not exist on your account.",
+            "discoveredAt": "2026-01-03T16:12:35.627Z"
+          },
+          {
+            "tag": "NotFoundError",
+            "code": 10007,
+            "message": "This Worker does not exist on your account.",
+            "discoveredAt": "2026-01-03T16:12:36.025Z"
+          },
+          {
+            "tag": "NotFoundError",
+            "code": 10007,
+            "message": "This Worker does not exist on your account.",
+            "discoveredAt": "2026-01-03T16:12:36.462Z"
+          },
+          {
+            "tag": "NotFoundError",
+            "code": 10007,
+            "message": "This Worker does not exist on your account.",
+            "discoveredAt": "2026-01-03T16:12:36.698Z"
+          },
+          {
+            "tag": "ValidationError",
+            "code": 10016,
+            "message": "Invalid Worker name. Ensure the name is lowercase, alphanumeric, and contains no spaces or special characters except dashes.",
+            "discoveredAt": "2026-01-03T16:12:40.638Z"
+          },
+          {
+            "tag": "NotFoundError",
+            "code": 10007,
+            "message": "This Worker does not exist on your account.",
+            "discoveredAt": "2026-01-03T16:12:41.319Z"
+          },
+          {
+            "tag": "NotFoundError",
+            "code": 10007,
+            "message": "This Worker does not exist on your account.",
+            "discoveredAt": "2026-01-03T16:12:41.565Z"
+          },
+          {
+            "tag": "NotFoundError",
+            "code": 10007,
+            "message": "This Worker does not exist on your account.",
+            "discoveredAt": "2026-01-03T16:12:42.329Z"
+          },
+          {
+            "tag": "ValidationError",
+            "code": 10016,
+            "message": "Invalid Worker name. Ensure the name is lowercase, alphanumeric, and contains no spaces or special characters except dashes.",
+            "discoveredAt": "2026-01-03T16:12:46.071Z"
+          },
+          {
+            "tag": "NotFoundError",
+            "code": 10007,
+            "message": "This Worker does not exist on your account.",
+            "discoveredAt": "2026-01-03T16:12:46.325Z"
+          },
+          {
+            "tag": "ValidationError",
+            "code": 10016,
+            "message": "Invalid Worker name. Ensure the name is lowercase, alphanumeric, and contains no spaces or special characters except dashes.",
+            "discoveredAt": "2026-01-03T16:12:46.545Z"
+          },
+          {
+            "tag": "ValidationError",
+            "code": 10016,
+            "message": "Invalid Worker name. Ensure the name is lowercase, alphanumeric, and contains no spaces or special characters except dashes.",
+            "discoveredAt": "2026-01-03T16:12:46.806Z"
+          },
+          {
+            "tag": "NotFoundError",
+            "code": 10007,
+            "message": "This Worker does not exist on your account.",
+            "discoveredAt": "2026-01-03T16:12:47.141Z"
+          },
+          {
+            "tag": "NotFoundError",
+            "code": 10007,
+            "message": "This Worker does not exist on your account.",
+            "discoveredAt": "2026-01-03T16:12:50.856Z"
+          },
+          {
+            "tag": "NotFoundError",
+            "code": 10007,
+            "message": "This Worker does not exist on your account.",
+            "discoveredAt": "2026-01-03T16:12:51.137Z"
+          },
+          {
+            "tag": "NotFoundError",
+            "code": 10007,
+            "message": "This Worker does not exist on your account.",
+            "discoveredAt": "2026-01-03T16:12:51.608Z"
+          },
+          {
+            "tag": "ParseError",
+            "code": 0,
+            "message": "Failed to parse error response: Bad Request",
+            "discoveredAt": "2026-01-03T16:12:51.628Z"
+          },
+          {
+            "tag": "NotFoundError",
+            "code": 10007,
+            "message": "This Worker does not exist on your account.",
+            "discoveredAt": "2026-01-03T16:12:55.797Z"
+          },
+          {
+            "tag": "ValidationError",
+            "code": 10016,
+            "message": "Invalid Worker name. Ensure the name is lowercase, alphanumeric, and contains no spaces or special characters except dashes.",
+            "discoveredAt": "2026-01-03T16:12:56.020Z"
+          },
+          {
+            "tag": "ValidationError",
+            "code": 10016,
+            "message": "Invalid Worker name. Ensure the name is lowercase, alphanumeric, and contains no spaces or special characters except dashes.",
+            "discoveredAt": "2026-01-03T16:12:56.544Z"
+          },
+          {
+            "tag": "NotFoundError",
+            "code": 10007,
+            "message": "This Worker does not exist on your account.",
+            "discoveredAt": "2026-01-03T16:12:56.788Z"
+          }
+        ]
+      }
+    }
+  }
+}
