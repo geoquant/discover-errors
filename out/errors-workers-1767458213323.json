@@ -1,0 +1,49 @@
+{
+  "workers": {
+    "service": "Workers",
+    "generatedAt": "2026-01-03T16:36:53.323Z",
+    "summary": {
+      "totalUniqueErrors": 1,
+      "documentedErrors": 0,
+      "undocumentedErrors": 1,
+      "operationsCovered": [
+        "createScript"
+      ],
+      "documentationCoverage": "0%"
+    },
+    "operations": {
+      "createScript": {
+        "documentedErrors": [],
+        "errors": {
+          "NotFoundError": {
+            "code": 10000,
+            "httpStatus": 403,
+            "category": "not_found",
+            "isDocumented": false,
+            "message": "Authentication error",
+            "triggerExamples": [
+              {
+                "scriptName": "test-discover-worker-1",
+                "script": "export default { fetch: () => new Response('Hello') }"
+              },
+              {
+                "scriptName": "",
+                "script": "export default { fetch: () => new Response('Hello') }"
+              },
+              {
+                "scriptName": "test-discover-worker-2",
+                "script": ""
+              }
+            ],
+            "occurrences": 13,
+            "handling": {
+              "retryable": false,
+              "suggestion": "Verify resource exists before calling. Handle 404 gracefully."
+            },
+            "firstSeen": "2026-01-03T16:36:26.825Z"
+          }
+        }
+      }
+    }
+  }
+}

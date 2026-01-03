@@ -1,0 +1,46 @@
+{
+  "d1": {
+    "service": "D1",
+    "generatedAt": "2026-01-03T16:44:42.940Z",
+    "summary": {
+      "totalUniqueErrors": 1,
+      "documentedErrors": 1,
+      "undocumentedErrors": 0,
+      "operationsCovered": [
+        "deleteDatabase"
+      ],
+      "documentationCoverage": "100%"
+    },
+    "operations": {
+      "deleteDatabase": {
+        "documentedErrors": [
+          "NotFoundError"
+        ],
+        "errors": {
+          "NotFoundError": {
+            "code": 10000,
+            "httpStatus": 401,
+            "category": "not_found",
+            "isDocumented": true,
+            "message": "Authentication error",
+            "triggerExamples": [
+              {
+                "databaseId": "test-discover-db-1"
+              },
+              {
+                "databaseId": ""
+              },
+              {}
+            ],
+            "occurrences": 12,
+            "handling": {
+              "retryable": false,
+              "suggestion": "Verify resource exists before calling. Handle 404 gracefully."
+            },
+            "firstSeen": "2026-01-03T16:44:24.217Z"
+          }
+        }
+      }
+    }
+  }
+}

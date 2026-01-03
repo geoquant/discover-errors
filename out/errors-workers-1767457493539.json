@@ -1,0 +1,70 @@
+{
+  "workers": {
+    "service": "Workers",
+    "generatedAt": "2026-01-03T16:24:53.539Z",
+    "summary": {
+      "totalUniqueErrors": 2,
+      "documentedErrors": 1,
+      "undocumentedErrors": 1,
+      "operationsCovered": [
+        "getScript"
+      ],
+      "documentationCoverage": "50%"
+    },
+    "operations": {
+      "getScript": {
+        "documentedErrors": [
+          "NotFoundError"
+        ],
+        "errors": {
+          "NotFoundError": {
+            "code": 10007,
+            "httpStatus": 404,
+            "category": "not_found",
+            "isDocumented": true,
+            "message": "This Worker does not exist on your account.",
+            "triggerExamples": [
+              {
+                "scriptName": "test-discover-valid-script"
+              },
+              {},
+              {
+                "scriptName": "test-discover-nonexistent-123456789"
+              }
+            ],
+            "occurrences": 11,
+            "handling": {
+              "retryable": false,
+              "suggestion": "Verify resource exists before calling. Handle 404 gracefully."
+            },
+            "firstSeen": "2026-01-03T16:24:32.370Z"
+          },
+          "ValidationError": {
+            "code": 10016,
+            "httpStatus": 400,
+            "category": "validation",
+            "isDocumented": false,
+            "message": "Invalid Worker name. Ensure the name is lowercase, alphanumeric, and contains no spaces or special characters except dashes.",
+            "triggerExamples": [
+              {
+                "scriptName": "test-discover-script-with-special-chars-!@#$%"
+              },
+              {
+                "scriptName": "test-discover-UPPERCASE-script"
+              },
+              {
+                "scriptName": "test discover with spaces"
+              }
+            ],
+            "occurrences": 4,
+            "handling": {
+              "retryable": false,
+              "suggestion": "Check input against schema. See message for specific field issues."
+            },
+            "firstSeen": "2026-01-03T16:24:37.499Z"
+          }
+        }
+      }
+    }
+  }
+}

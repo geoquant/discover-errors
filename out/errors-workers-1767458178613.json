@@ -1,0 +1,70 @@
+{
+  "workers": {
+    "service": "Workers",
+    "generatedAt": "2026-01-03T16:36:18.613Z",
+    "summary": {
+      "totalUniqueErrors": 2,
+      "documentedErrors": 1,
+      "undocumentedErrors": 1,
+      "operationsCovered": [
+        "getScript"
+      ],
+      "documentationCoverage": "50%"
+    },
+    "operations": {
+      "getScript": {
+        "documentedErrors": [
+          "NotFoundError"
+        ],
+        "errors": {
+          "NotFoundError": {
+            "code": 10007,
+            "httpStatus": 404,
+            "category": "not_found",
+            "isDocumented": true,
+            "message": "This Worker does not exist on your account.",
+            "triggerExamples": [
+              {
+                "scriptName": "test-discover-nonexistent"
+              },
+              {
+                "scriptName": "a"
+              },
+              {}
+            ],
+            "occurrences": 4,
+            "handling": {
+              "retryable": false,
+              "suggestion": "Verify resource exists before calling. Handle 404 gracefully."
+            },
+            "firstSeen": "2026-01-03T16:35:59.895Z"
+          },
+          "ValidationError": {
+            "code": 10016,
+            "httpStatus": 400,
+            "category": "validation",
+            "isDocumented": false,
+            "message": "Invalid Worker name. Ensure the name is lowercase, alphanumeric, and contains no spaces or special characters except dashes.",
+            "triggerExamples": [
+              {
+                "scriptName": "test-discover-@invalid#chars"
+              },
+              {
+                "scriptName": "test-discover-with SPACES"
+              },
+              {
+                "scriptName": "TEST-DISCOVER-UPPERCASE"
+              }
+            ],
+            "occurrences": 4,
+            "handling": {
+              "retryable": false,
+              "suggestion": "Check input against schema. See message for specific field issues."
+            },
+            "firstSeen": "2026-01-03T16:36:00.444Z"
+          }
+        }
+      }
+    }
+  }
+}

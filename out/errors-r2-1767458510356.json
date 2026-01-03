@@ -1,0 +1,73 @@
+{
+  "r2": {
+    "service": "R2",
+    "generatedAt": "2026-01-03T16:41:50.356Z",
+    "summary": {
+      "totalUniqueErrors": 2,
+      "documentedErrors": 1,
+      "undocumentedErrors": 1,
+      "operationsCovered": [
+        "getBucket"
+      ],
+      "documentationCoverage": "50%"
+    },
+    "operations": {
+      "getBucket": {
+        "documentedErrors": [
+          "NotFoundError"
+        ],
+        "errors": {
+          "NotFoundError": {
+            "code": 10006,
+            "httpStatus": 404,
+            "category": "not_found",
+            "isDocumented": true,
+            "message": "The specified bucket does not exist.",
+            "triggerExamples": [
+              {
+                "name": "test-discover-bucket-001"
+              },
+              {
+                "name": "nonexistent-bucket-xyz-12345"
+              },
+              {
+                "name": "test-discover-bucket-001",
+                "extra_field": "should_fail"
+              }
+            ],
+            "occurrences": 5,
+            "handling": {
+              "retryable": false,
+              "suggestion": "Verify resource exists before calling. Handle 404 gracefully."
+            },
+            "firstSeen": "2026-01-03T16:41:32.861Z"
+          },
+          "ValidationError": {
+            "code": 10005,
+            "httpStatus": 400,
+            "category": "validation",
+            "isDocumented": false,
+            "message": "The specified bucket name is not valid.",
+            "triggerExamples": [
+              {
+                "name": "a"
+              },
+              {
+                "name": "UPPERCASE-BUCKET"
+              },
+              {
+                "name": "bucket_with_underscore"
+              }
+            ],
+            "occurrences": 6,
+            "handling": {
+              "retryable": false,
+              "suggestion": "Check input against schema. See message for specific field issues."
+            },
+            "firstSeen": "2026-01-03T16:41:34.033Z"
+          }
+        }
+      }
+    }
+  }
+}

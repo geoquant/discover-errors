@@ -1,0 +1,46 @@
+{
+  "r2": {
+    "service": "R2",
+    "generatedAt": "2026-01-03T16:42:47.981Z",
+    "summary": {
+      "totalUniqueErrors": 1,
+      "documentedErrors": 0,
+      "undocumentedErrors": 1,
+      "operationsCovered": [
+        "createBucket"
+      ],
+      "documentationCoverage": "0%"
+    },
+    "operations": {
+      "createBucket": {
+        "documentedErrors": [],
+        "errors": {
+          "NotFoundError": {
+            "code": 10000,
+            "httpStatus": 403,
+            "category": "not_found",
+            "isDocumented": false,
+            "message": "Authentication error",
+            "triggerExamples": [
+              {
+                "name": "test-discover-bucket-1"
+              },
+              {
+                "name": ""
+              },
+              {
+                "name": "invalid_bucket_name_with_uppercase"
+              }
+            ],
+            "occurrences": 15,
+            "handling": {
+              "retryable": false,
+              "suggestion": "Verify resource exists before calling. Handle 404 gracefully."
+            },
+            "firstSeen": "2026-01-03T16:41:59.482Z"
+          }
+        }
+      }
+    }
+  }
+}

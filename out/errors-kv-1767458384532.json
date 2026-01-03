@@ -1,0 +1,104 @@
+{
+  "kv": {
+    "service": "KV",
+    "generatedAt": "2026-01-03T16:39:44.532Z",
+    "summary": {
+      "totalUniqueErrors": 3,
+      "documentedErrors": 1,
+      "undocumentedErrors": 2,
+      "operationsCovered": [
+        "getValue"
+      ],
+      "documentationCoverage": "33%"
+    },
+    "operations": {
+      "getValue": {
+        "documentedErrors": [
+          "NotFoundError"
+        ],
+        "errors": {
+          "ValidationError": {
+            "code": 10011,
+            "httpStatus": 400,
+            "category": "validation",
+            "isDocumented": false,
+            "message": "could not parse UUID from request's namespace_id: 'invalid UUID length: 18'",
+            "triggerExamples": [
+              {
+                "namespaceId": "test-discover-ns-1",
+                "keyName": "test-key-1"
+              },
+              {
+                "keyName": "test-key"
+              },
+              {
+                "namespaceId": "test-discover-ns-2"
+              }
+            ],
+            "occurrences": 8,
+            "handling": {
+              "retryable": false,
+              "suggestion": "Check input against schema. See message for specific field issues."
+            },
+            "firstSeen": "2026-01-03T16:39:21.631Z"
+          },
+          "CloudflareError": {
+            "code": 0,
+            "httpStatus": 404,
+            "category": "not_found",
+            "isDocumented": false,
+            "message": "Unknown error: API returned success=false but no error details",
+            "triggerExamples": [
+              {
+                "namespaceId": "",
+                "keyName": "test-key"
+              },
+              {
+                "namespaceId": "550e8400-e29b-41d4-a716-446655440000",
+                "keyName": ""
+              },
+              {
+                "namespaceId": "550e8400-e29b-41d4-a716-446655440000",
+                "keyName": "  "
+              }
+            ],
+            "occurrences": 3,
+            "handling": {
+              "retryable": false,
+              "suggestion": "Verify resource exists before calling. Handle 404 gracefully."
+            },
+            "firstSeen": "2026-01-03T16:39:21.755Z"
+          },
+          "NotFoundError": {
+            "code": 10013,
+            "httpStatus": 404,
+            "category": "not_found",
+            "isDocumented": true,
+            "message": "get: 'namespace not found'",
+            "triggerExamples": [
+              {
+                "namespaceId": "550e8400-e29b-41d4-a716-446655440000",
+                "keyName": "test-key"
+              },
+              {
+                "namespaceId": "550e8400-e29b-41d4-a716-446655440000",
+                "keyName": "test-key",
+                "extra": "field"
+              },
+              {
+                "namespaceId": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+                "keyName": "key-with-special-chars-!@#$%"
+              }
+            ],
+            "occurrences": 6,
+            "handling": {
+              "retryable": false,
+              "suggestion": "Verify resource exists before calling. Handle 404 gracefully."
+            },
+            "firstSeen": "2026-01-03T16:39:26.842Z"
+          }
+        }
+      }
+    }
+  }
+}

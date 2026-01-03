@@ -1,0 +1,70 @@
+{
+  "workers": {
+    "service": "Workers",
+    "generatedAt": "2026-01-03T16:25:32.421Z",
+    "summary": {
+      "totalUniqueErrors": 2,
+      "documentedErrors": 1,
+      "undocumentedErrors": 1,
+      "operationsCovered": [
+        "getScript"
+      ],
+      "documentationCoverage": "50%"
+    },
+    "operations": {
+      "getScript": {
+        "documentedErrors": [
+          "NotFoundError"
+        ],
+        "errors": {
+          "NotFoundError": {
+            "code": 10007,
+            "httpStatus": 404,
+            "category": "not_found",
+            "isDocumented": true,
+            "message": "This Worker does not exist on your account.",
+            "triggerExamples": [
+              {
+                "scriptName": "test-discover-script-1"
+              },
+              {},
+              {
+                "scriptName": "nonexistent-script-12345"
+              }
+            ],
+            "occurrences": 10,
+            "handling": {
+              "retryable": false,
+              "suggestion": "Verify resource exists before calling. Handle 404 gracefully."
+            },
+            "firstSeen": "2026-01-03T16:25:09.566Z"
+          },
+          "ValidationError": {
+            "code": 10016,
+            "httpStatus": 400,
+            "category": "validation",
+            "isDocumented": false,
+            "message": "Invalid Worker name. Ensure the name is lowercase, alphanumeric, and contains no spaces or special characters except dashes.",
+            "triggerExamples": [
+              {
+                "scriptName": "test-discover-script-with-special-chars-!@#$%"
+              },
+              {
+                "scriptName": "TEST-SCRIPT-UPPERCASE"
+              },
+              {
+                "scriptName": "test script with spaces"
+              }
+            ],
+            "occurrences": 4,
+            "handling": {
+              "retryable": false,
+              "suggestion": "Check input against schema. See message for specific field issues."
+            },
+            "firstSeen": "2026-01-03T16:25:16.208Z"
+          }
+        }
+      }
+    }
+  }
+}

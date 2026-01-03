@@ -1,0 +1,75 @@
+{
+  "kv": {
+    "service": "KV",
+    "generatedAt": "2026-01-03T16:39:12.605Z",
+    "summary": {
+      "totalUniqueErrors": 3,
+      "documentedErrors": 1,
+      "undocumentedErrors": 2,
+      "operationsCovered": [
+        "listKeys"
+      ],
+      "documentationCoverage": "33%"
+    },
+    "operations": {
+      "listKeys": {
+        "documentedErrors": [
+          "NotFoundError"
+        ],
+        "errors": {
+          "ValidationError": {
+            "code": 10011,
+            "httpStatus": 400,
+            "category": "validation",
+            "isDocumented": false,
+            "message": "could not parse UUID from request's namespace_id: 'invalid UUID length: 21'",
+            "triggerExamples": [
+              {
+                "namespaceId": "test-discover-kv-ns-1"
+              },
+              {
+                "namespaceId": ""
+              },
+              {
+                "namespaceId": "test-discover-kv-ns-1",
+                "limit": -1
+              }
+            ],
+            "occurrences": 9,
+            "handling": {
+              "retryable": false,
+              "suggestion": "Check input against schema. See message for specific field issues."
+            },
+            "firstSeen": "2026-01-03T16:38:49.967Z"
+          },
+          "NotFoundError": {
+            "code": 10013,
+            "httpStatus": 404,
+            "category": "not_found",
+            "isDocumented": true,
+            "message": "list keys: 'namespace not found'",
+            "triggerExamples": [
+              {
+                "namespaceId": "550e8400-e29b-41d4-a716-446655440000"
+              },
+              {
+                "namespaceId": "550e8400-e29b-41d4-a716-446655440000",
+                "prefix": ""
+              },
+              {
+                "namespaceId": "550e8400-e29b-41d4-a716-446655440000",
+                "cursor": ""
+              }
+            ],
+            "occurrences": 7,
+            "handling": {
+              "retryable": false,
+              "suggestion": "Verify resource exists before calling. Handle 404 gracefully."
+            },
+            "firstSeen": "2026-01-03T16:38:55.066Z"
+          }
+        }
+      }
+    }
+  }
+}

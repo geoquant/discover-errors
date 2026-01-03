@@ -1,0 +1,106 @@
+{
+  "d1": {
+    "service": "D1",
+    "generatedAt": "2026-01-03T16:45:14.772Z",
+    "summary": {
+      "totalUniqueErrors": 3,
+      "documentedErrors": 2,
+      "undocumentedErrors": 1,
+      "operationsCovered": [
+        "executeQuery"
+      ],
+      "documentationCoverage": "67%"
+    },
+    "operations": {
+      "executeQuery": {
+        "documentedErrors": [
+          "ValidationError",
+          "NotFoundError"
+        ],
+        "errors": {
+          "ValidationError": {
+            "code": 7400,
+            "httpStatus": 400,
+            "category": "validation",
+            "isDocumented": true,
+            "message": "Invalid property: databaseId => Invalid uuid",
+            "triggerExamples": [
+              {
+                "databaseId": "test-discover-db-1",
+                "sql": "SELECT 1"
+              },
+              {
+                "databaseId": "test-discover-db-1",
+                "sql": ""
+              },
+              {
+                "databaseId": "test-discover-db-1",
+                "sql": "INVALID QUERY SYNTAX HERE"
+              }
+            ],
+            "occurrences": 7,
+            "handling": {
+              "retryable": false,
+              "suggestion": "Check input against schema. See message for specific field issues."
+            },
+            "firstSeen": "2026-01-03T16:44:52.518Z"
+          },
+          "UnknownCloudflareError": {
+            "code": 7001,
+            "httpStatus": 405,
+            "category": "unknown",
+            "isDocumented": false,
+            "message": "POST not supported for requested URI.",
+            "triggerExamples": [
+              {
+                "databaseId": "",
+                "sql": "SELECT 1"
+              }
+            ],
+            "occurrences": 1,
+            "handling": {
+              "retryable": false,
+              "suggestion": "Check error message for details. Contact Cloudflare support if persistent."
+            },
+            "firstSeen": "2026-01-03T16:44:52.589Z"
+          },
+          "NotFoundError": {
+            "code": 7404,
+            "httpStatus": 404,
+            "category": "not_found",
+            "isDocumented": true,
+            "message": "The database 550e8400-e29b-41d4-a716-446655440000 could not be found",
+            "triggerExamples": [
+              {
+                "databaseId": "550e8400-e29b-41d4-a716-446655440000",
+                "sql": "SELECT 1"
+              },
+              {
+                "databaseId": "550e8400-e29b-41d4-a716-446655440000",
+                "sql": "SELECT 1",
+                "params": [
+                  1,
+                  2,
+                  "invalid"
+                ]
+              },
+              {
+                "databaseId": "550e8400-e29b-41d4-a716-446655440000",
+                "sql": "SELECT ? as col",
+                "params": [
+                  null
+                ]
+              }
+            ],
+            "occurrences": 7,
+            "handling": {
+              "retryable": false,
+              "suggestion": "Verify resource exists before calling. Handle 404 gracefully."
+            },
+            "firstSeen": "2026-01-03T16:44:57.990Z"
+          }
+        }
+      }
+    }
+  }
+}

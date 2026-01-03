@@ -1,0 +1,73 @@
+{
+  "workers": {
+    "service": "Workers",
+    "generatedAt": "2026-01-03T16:31:10.372Z",
+    "summary": {
+      "totalUniqueErrors": 2,
+      "documentedErrors": 1,
+      "undocumentedErrors": 1,
+      "operationsCovered": [
+        "getScript"
+      ],
+      "documentationCoverage": "50%"
+    },
+    "operations": {
+      "getScript": {
+        "documentedErrors": [
+          "NotFoundError"
+        ],
+        "errors": {
+          "NotFoundError": {
+            "code": 10007,
+            "httpStatus": 404,
+            "category": "not_found",
+            "isDocumented": true,
+            "message": "This Worker does not exist on your account.",
+            "triggerExamples": [
+              {
+                "scriptName": "test-discover-script-1"
+              },
+              {},
+              {
+                "scriptName": null
+              }
+            ],
+            "occurrences": 6,
+            "handling": {
+              "retryable": false,
+              "suggestion": "Verify resource exists before calling. Handle 404 gracefully."
+            },
+            "firstSeen": "2026-01-03T16:30:39.282Z"
+          },
+          "ValidationError": {
+            "code": 10016,
+            "httpStatus": 400,
+            "category": "validation",
+            "isDocumented": false,
+            "message": "Invalid Worker name. Ensure the name is lowercase, alphanumeric, and contains no spaces or special characters except dashes.",
+            "triggerExamples": [
+              {
+                "scriptName": [
+                  "array",
+                  "value"
+                ]
+              },
+              {
+                "scriptName": "test SPACE invalid"
+              },
+              {
+                "scriptName": "TEST-UPPERCASE"
+              }
+            ],
+            "occurrences": 4,
+            "handling": {
+              "retryable": false,
+              "suggestion": "Check input against schema. See message for specific field issues."
+            },
+            "firstSeen": "2026-01-03T16:30:52.958Z"
+          }
+        }
+      }
+    }
+  }
+}

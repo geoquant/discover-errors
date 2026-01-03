@@ -1,0 +1,53 @@
+{
+  "kv": {
+    "service": "KV",
+    "generatedAt": "2026-01-03T16:40:19.660Z",
+    "summary": {
+      "totalUniqueErrors": 1,
+      "documentedErrors": 1,
+      "undocumentedErrors": 0,
+      "operationsCovered": [
+        "putValue"
+      ],
+      "documentationCoverage": "100%"
+    },
+    "operations": {
+      "putValue": {
+        "documentedErrors": [
+          "NotFoundError"
+        ],
+        "errors": {
+          "NotFoundError": {
+            "code": 10000,
+            "httpStatus": 405,
+            "category": "not_found",
+            "isDocumented": true,
+            "message": "PUT method not allowed for the api_token authentication scheme",
+            "triggerExamples": [
+              {
+                "namespaceId": "test-discover-ns-1",
+                "keyName": "test-key",
+                "value": "test-value"
+              },
+              {
+                "namespaceId": "",
+                "keyName": "test-key",
+                "value": "test-value"
+              },
+              {
+                "keyName": "test-key",
+                "value": "test-value"
+              }
+            ],
+            "occurrences": 16,
+            "handling": {
+              "retryable": false,
+              "suggestion": "Verify resource exists before calling. Handle 404 gracefully."
+            },
+            "firstSeen": "2026-01-03T16:39:53.267Z"
+          }
+        }
+      }
+    }
+  }
+}

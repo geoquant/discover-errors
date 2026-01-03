@@ -1,0 +1,46 @@
+{
+  "workers": {
+    "service": "Workers",
+    "generatedAt": "2026-01-03T16:37:19.900Z",
+    "summary": {
+      "totalUniqueErrors": 1,
+      "documentedErrors": 1,
+      "undocumentedErrors": 0,
+      "operationsCovered": [
+        "deleteScript"
+      ],
+      "documentationCoverage": "100%"
+    },
+    "operations": {
+      "deleteScript": {
+        "documentedErrors": [
+          "NotFoundError"
+        ],
+        "errors": {
+          "NotFoundError": {
+            "code": 10000,
+            "httpStatus": 403,
+            "category": "not_found",
+            "isDocumented": true,
+            "message": "Authentication error",
+            "triggerExamples": [
+              {
+                "scriptName": "test-discover-valid-script"
+              },
+              {},
+              {
+                "scriptName": ""
+              }
+            ],
+            "occurrences": 7,
+            "handling": {
+              "retryable": false,
+              "suggestion": "Verify resource exists before calling. Handle 404 gracefully."
+            },
+            "firstSeen": "2026-01-03T16:37:02.500Z"
+          }
+        }
+      }
+    }
+  }
+}

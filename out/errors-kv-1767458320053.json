@@ -1,0 +1,46 @@
+{
+  "kv": {
+    "service": "KV",
+    "generatedAt": "2026-01-03T16:38:40.053Z",
+    "summary": {
+      "totalUniqueErrors": 1,
+      "documentedErrors": 1,
+      "undocumentedErrors": 0,
+      "operationsCovered": [
+        "deleteNamespace"
+      ],
+      "documentationCoverage": "100%"
+    },
+    "operations": {
+      "deleteNamespace": {
+        "documentedErrors": [
+          "NotFoundError"
+        ],
+        "errors": {
+          "NotFoundError": {
+            "code": 10000,
+            "httpStatus": 405,
+            "category": "not_found",
+            "isDocumented": true,
+            "message": "DELETE method not allowed for the api_token authentication scheme",
+            "triggerExamples": [
+              {
+                "namespaceId": "test-discover-ns-1"
+              },
+              {
+                "namespaceId": ""
+              },
+              {}
+            ],
+            "occurrences": 10,
+            "handling": {
+              "retryable": false,
+              "suggestion": "Verify resource exists before calling. Handle 404 gracefully."
+            },
+            "firstSeen": "2026-01-03T16:38:24.137Z"
+          }
+        }
+      }
+    }
+  }
+}
