@@ -23,8 +23,38 @@ import type { DiscoveredError } from "../output/types-generator.ts";
 
 export const discoveredErrors: DiscoveredError[] = [];
 
+/** Map error tag to category */
+const categorizeError = (tag: string, httpStatus?: number): DiscoveredError["category"] => {
+  const tagLower = tag.toLowerCase();
+  if (tagLower.includes("auth") || tagLower.includes("forbidden") || tagLower.includes("unauthorized")) {
+    return "authentication";
+  }
+  if (tagLower.includes("notfound") || tagLower.includes("not_found")) {
+    return "not_found";
+  }
+  if (tagLower.includes("validation") || tagLower.includes("invalid") || tagLower.includes("parse")) {
+    return "validation";
+  }
+  if (tagLower.includes("rate") || tagLower.includes("limit") || tagLower.includes("throttle")) {
+    return "rate_limit";
+  }
+  if (tagLower.includes("quota") || tagLower.includes("exceeded")) {
+    return "quota";
+  }
+  if (tagLower.includes("exists") || tagLower.includes("conflict") || tagLower.includes("duplicate")) {
+    return "conflict";
+  }
+  // Fallback to HTTP status
+  if (httpStatus === 401 || httpStatus === 403) return "authentication";
+  if (httpStatus === 404) return "not_found";
+  if (httpStatus === 400) return "validation";
+  if (httpStatus === 429) return "rate_limit";
+  if (httpStatus === 409) return "conflict";
+  return "unknown";
+};
+
 /**
- * Record a discovered error.
+ * Record a discovered error with full context.
  */
 export const recordError = (
   service: string,
@@ -32,7 +62,9 @@ export const recordError = (
   tag: string,
   code: number,
   message: string,
-  isNew: boolean
+  isDocumented: boolean,
+  httpStatus?: number,
+  triggerInput?: Record<string, unknown>
 ): void => {
   discoveredErrors.push({
     service,
@@ -40,13 +72,17 @@ export const recordError = (
     tag,
     code,
     message,
+    httpStatus,
     discoveredAt: new Date().toISOString(),
+    isDocumented,
+    triggerInput,
+    category: categorizeError(tag, httpStatus),
   });
-  
-  // Log to stderr for debugging
-  if (isNew) {
-    console.error(`[DISCOVERED] ${service}.${operation}: ${tag} (${code}) - ${message}`);
-  }
+
+  // Log to stderr for visibility
+  const docStatus = isDocumented ? "documented" : "UNDOCUMENTED";
+  const statusStr = httpStatus ? ` [HTTP ${httpStatus}]` : "";
+  console.error(`[${docStatus}] ${service}.${operation}: ${tag} (${code})${statusStr} - ${message}`);
 };
 
 // ============================================================================
@@ -209,12 +245,12 @@ export const toolsLayer = toolkit.toLayer(
       CallApi: ({ service, operation, input }) =>
         Effect.gen(function* () {
           yield* Console.log(`\x1b[34mCallApi: ${service}.${operation}\x1b[0m`);
-          
+
           const op = getOperation(service, operation);
           if (!op) {
             return yield* Effect.fail(`Operation "${operation}" not found in "${service}"`);
           }
-          
+
           // Parse input JSON - handle various input formats
           let parsedInput: Record<string, unknown>;
           try {
@@ -235,10 +271,10 @@ export const toolsLayer = toolkit.toLayer(
             // If JSON parsing fails, try to be helpful
             return `Error: Invalid JSON input. Expected valid JSON object, got: "${String(input).slice(0, 50)}"`;
           }
-          
-          // Get known error tags
+
+          // Get known error tags from the operation's defined errors
           const knownErrors = new Set(op.errors?.map((e: any) => e._tag) ?? []);
-          
+
           // Execute the operation
           const result: string = yield* op(parsedInput).pipe(
             Effect.map((response) => {
@@ -249,19 +285,33 @@ export const toolsLayer = toolkit.toLayer(
               const errorTag = err._tag;
               const message = "message" in err ? err.message : String(err);
               const code = "code" in err ? (err as any).code : 0;
-              const isNew = !knownErrors.has(errorTag);
-              
-              // Record the error for later analysis
-              recordError(service, operation, errorTag, code, message, isNew);
-              
-              if (isNew) {
-                return Effect.succeed(`⚠️ NEW ERROR DISCOVERED: "${errorTag}" - ${message}`);
+              const httpStatus = "httpStatus" in err ? (err as any).httpStatus : undefined;
+              const isDocumented = knownErrors.has(errorTag);
+
+              // Record the error with full context for rich output
+              recordError(
+                service,
+                operation,
+                errorTag,
+                code,
+                message,
+                isDocumented,
+                httpStatus,
+                parsedInput // Capture what input triggered this error
+              );
+
+              if (!isDocumented) {
+                return Effect.succeed(
+                  `⚠️ UNDOCUMENTED ERROR: "${errorTag}" (code: ${code}, HTTP: ${httpStatus ?? "unknown"}) - ${message}`
+                );
               } else {
-                return Effect.succeed(`Error "${errorTag}" (known): ${message}`);
+                return Effect.succeed(
+                  `Error "${errorTag}" [documented] (code: ${code}, HTTP: ${httpStatus ?? "unknown"}): ${message}`
+                );
               }
             })
           );
-          
+
           return result;
         }) as Effect.Effect<string, any, never>,
 

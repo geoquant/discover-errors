@@ -10,6 +10,12 @@ export interface DiscoveredError {
   message: string;
   httpStatus?: number;
   discoveredAt: string;
+  /** Whether this error is documented in the spec */
+  isDocumented: boolean;
+  /** The input that triggered this error */
+  triggerInput?: Record<string, unknown>;
+  /** Error category for developer guidance */
+  category: "authentication" | "validation" | "not_found" | "rate_limit" | "quota" | "conflict" | "unknown";
 }
 
 /**
